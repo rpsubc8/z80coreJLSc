@@ -1,5 +1,5 @@
 # Core Z80 en C 
-He realizado una conversión rápida del core del Z80 de Jose Luis Sánchez a C (no POSIX).
+He realizado una conversión rápida del core del Z80 de José Luis Sánchez a C (no POSIX).
 El proyecto original en C++ es de Jose Luis Sánchez. Yo tan sólo he realizado una conversión a C, para que
  sirva de plantilla en otras plataformas y compiladores de recursos más reducidos.
 
@@ -73,6 +73,6 @@ unsigned char isActiveINT(void)
 <br><br>
 <h1>Test</h1>
 Si lanzamos la simulación que simula la salida de consola de CPM, nos saldrá los tiempos de ejecución del test zxall:
-
-
-
+<center><img src='https://raw.githubusercontent.com/rpsubc8/z80coreJLSc/main/preview/previewzxall1.gif'></center>
+Cuando termine, si todo va bien, saldrá algo como lo siguiente:
+<center><img src='https://raw.githubusercontent.com/rpsubc8/z80coreJLSc/main/preview/previewzxall2.gif'></center>
