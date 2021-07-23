@@ -67,7 +67,7 @@ unsigned char isActiveINT(void)
 {
 }
 </pre>
-Debemos tener en cuenta la sección de <b>Inicio simulador</b> del fichero <b>gbGlobal.h</h>, porque ahi es donde definimos los recursos del Z80 a emular, es decir, RAM y puertos.
+Debemos tener en cuenta la sección de <b>Inicio simulador</b> del fichero <b>gbGlobal.h</b>, porque ahi es donde definimos los recursos del Z80 a emular, es decir, RAM y puertos.
 
 
 
