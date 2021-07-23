@@ -3,6 +3,9 @@ He realizado una conversión rápida del core del Z80 de Jose Luis Sánchez a C 
 El proyecto original en C++ es de Jose Luis Sánchez. Yo tan sólo he realizado una conversión a C, para que
  sirva de plantilla en otras plataformas y compiladores de recursos más reducidos.
 
+<h1>Proyecto original</h1>
+<a href='https://github.com/jsanchezv/z80cpp'>z80cpp</a></li>
+
 
 
 <h1>Archivos</h1>
@@ -14,6 +17,9 @@ Todo se puede dejar simplificado en 2 archivos (z80.c y z80.h), pero para realiz
  <li>zxallbin.h (el binario de test zxall)</li>
  <li>gbGlobal (variables globales de Z80 y de simulación)</li>
 </ul>
+
+
+
 
 <h1>Entorno</h1>
 Está preparado para mingw32 (devcpp) de Windows, pero puede usarse gcc y Linux.
@@ -62,6 +68,9 @@ unsigned char isActiveINT(void)
 {
 }
 </pre>
+
+
+
 
 
 <h1>Test</h1>
