@@ -1,0 +1,33 @@
+# Project: CoreC
+# Makefile created by Dev-C++ 4.9.9.2
+
+CPP  = g++.exe
+CC   = gcc.exe
+WINDRES = windres.exe
+RES  = 
+OBJ  = sim.o z80.o $(RES)
+LINKOBJ  = sim.o z80.o $(RES)
+LIBS =  -L"H:/compi/Dev-CppSDL/lib" -s -O2  
+INCS =  -I"H:/compi/Dev-CppSDL/include" 
+CXXINCS =  -I"H:/compi/Dev-CppSDL/lib/gcc/mingw32/3.4.2/include"  -I"H:/compi/Dev-CppSDL/include/c++/3.4.2/backward"  -I"H:/compi/Dev-CppSDL/include/c++/3.4.2/mingw32"  -I"H:/compi/Dev-CppSDL/include/c++/3.4.2"  -I"H:/compi/Dev-CppSDL/include" 
+BIN  = CoreC.exe
+CXXFLAGS = $(CXXINCS)   -fshort-double
+CFLAGS = $(INCS)   -fshort-double
+RM = rm -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before CoreC.exe all-after
+
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o "CoreC.exe" $(LIBS)
+
+sim.o: sim.c
+	$(CPP) -c sim.c -o sim.o $(CXXFLAGS)
+
+z80.o: z80.c
+	$(CPP) -c z80.c -o z80.o $(CXXFLAGS)
