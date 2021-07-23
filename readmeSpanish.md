@@ -19,7 +19,7 @@ Todo se puede dejar simplificado en 2 archivos (z80.c y z80.h), pero para realiz
 
 <br><br>
 <h1>Entorno</h1>
-Está preparado para mingw32 (devcpp) de Windows, pero puede usarse gcc y Linux.
+Está preparado para mingw32 (devcpp) de Windows, pero puede usarse gcc con Linux, así como sistemas embebidos.
 
 
 <br><br>
@@ -67,6 +67,7 @@ unsigned char isActiveINT(void)
 {
 }
 </pre>
+Debemos tener en cuenta la sección de <b>Inicio simulador</b> del fichero <b>gbGlobal.h</h>, porque ahi es donde definimos los recursos del Z80 a emular, es decir, RAM y puertos.
 
 
 
