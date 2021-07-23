@@ -3,6 +3,7 @@ He realizado una conversión rápida del core del Z80 de José Luis Sánchez a C
 El proyecto original en C++ es de Jose Luis Sánchez. Yo tan sólo he realizado una conversión a C, para que
  sirva de plantilla en otras plataformas y compiladores de recursos más reducidos.
 
+<br><br>
 <h1>Proyecto original</h1>
 <a href='https://github.com/jsanchezv/z80cpp'>z80cpp</a></li>
 
