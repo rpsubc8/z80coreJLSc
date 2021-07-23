@@ -6,8 +6,8 @@ El proyecto original en C++ es de Jose Luis Sánchez. Yo tan sólo he realizado 
 <h1>Proyecto original</h1>
 <a href='https://github.com/jsanchezv/z80cpp'>z80cpp</a></li>
 
-
-
+<br>
+<br>
 <h1>Archivos</h1>
 Todo se puede dejar simplificado en 2 archivos (z80.c y z80.h), pero para realizar simulaciones, se ha dejado la siguiente estructura:
 <ul>
@@ -18,9 +18,8 @@ Todo se puede dejar simplificado en 2 archivos (z80.c y z80.h), pero para realiz
  <li>gbGlobal (variables globales de Z80 y de simulación)</li>
 </ul>
 
-
-
-
+<br>
+<br>
 <h1>Entorno</h1>
 Está preparado para mingw32 (devcpp) de Windows, pero puede usarse gcc y Linux.
 
@@ -71,8 +70,8 @@ unsigned char isActiveINT(void)
 
 
 
-
-
+<br>
+<br>
 <h1>Test</h1>
 Si lanzamos la simulación que simula la salida de consola de CPM, nos saldrá los tiempos de ejecución del test zxall:
 
