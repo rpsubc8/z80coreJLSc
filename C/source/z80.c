@@ -54,7 +54,9 @@ unsigned char Z80_sz53pn_addTable[256];
 unsigned char Z80_sz53n_subTable[256];
 unsigned char Z80_sz53pn_subTable[256];
 
-unsigned char Z80_breakpointEnabled= false;
+#ifdef WITH_BREAKPOINT_SUPPORT
+ unsigned char Z80_breakpointEnabled= false;
+#endif 
 
 
 inline unsigned char fast_getRegA(){ return Z80_regA; }
