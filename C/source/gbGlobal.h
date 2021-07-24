@@ -55,7 +55,9 @@
  extern unsigned char Z80_sz53n_subTable[256];
  extern unsigned char Z80_sz53pn_subTable[256];
  
+#ifdef WITH_BREAKPOINT_SUPPORT
  extern unsigned char Z80_breakpointEnabled;
+#endif 
  
  //Fin Z80_H
 
