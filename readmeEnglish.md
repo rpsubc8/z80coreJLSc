@@ -1,7 +1,7 @@
 # Core Z80 in C
 I have made a quick conversion of Jose Luis Sanchez's Z80 core to C (not POSIX).
 The original C++ project is by Jose Luis Sanchez. I have only made a conversion to C, to serve as a template for other platforms and compilers with smaller resources.
- serve as a template for other platforms and compilers with smaller resources.
+ Serve as a template for other platforms and compilers with smaller resources.
 
 <br><br>
 <h1>Original project</h1>
@@ -21,7 +21,7 @@ Everything can be left simplified in 2 files (z80.c and z80.h), but for simulati
 
 
 <br><br>
-<h1>Enviroment</h1>
+<h1>Environment</h1>
 It is prepared for Windows mingw32 (devcpp), but gcc can be used with Linux as well as embedded systems.
 
 <br><br>
