@@ -2,29 +2,67 @@
 //NOT C POSIX
 #include <stdio.h>
 #include <string.h>
+#include "gbConfig.h"
 #include "gbGlobal.h"
 #include "z80.h"
 #include "zxallbin.h"
 #include <time.h>
 
 
-unsigned int tstates;
-unsigned char z80Ram[0x10000];
-unsigned char z80Ports[0x10000];
-unsigned char finish;
+
+//Inicio compila C POSIX
+//RegisterPair regBC,regDE;
+//void Z80Init();
+//Fin compila C POSIX
 
 
-time_t rawtime;    
-struct tm * timeinfo;
+#ifdef cfg_use_tstates_64bits
+ #ifdef cfg_use_time_fast
+  static unsigned long tstates;
+ #else
+  unsigned long tstates;
+ #endif 
+#else
+ #ifdef cfg_use_time_fast
+  static unsigned int tstates;
+ #else
+  unsigned int tstates;
+ #endif 
+#endif 
 
-void ShowTime(void);
+#ifdef cfg_use_z80RAM_fast
+ static unsigned char z80Ram[0x10000];
+#else
+ unsigned char z80Ram[0x10000];
+#endif 
 
-void ShowTime()
-{
- time (&rawtime);
- timeinfo= localtime(&rawtime);
- printf(" (%d:%d:%d) ",timeinfo->tm_hour,timeinfo->tm_min,timeinfo->tm_sec);
-}
+#ifdef cfg_use_z80Ports_fast
+ static unsigned char z80Ports[0x10000];
+#else
+ unsigned char z80Ports[0x10000];
+#endif
+
+#ifdef cfg_use_finish_fast
+ static unsigned char finish;
+#else
+ unsigned char finish;
+#endif 
+char cadLog[64];
+
+#ifdef cfg_use_time_show
+ time_t rawtime;    
+ struct tm * timeinfo;
+
+ void ShowTime(void);
+
+ void ShowTime()
+ {
+  time (&rawtime);
+  timeinfo= localtime(&rawtime);
+  printf(" (%02i:%02i:%02i) ",timeinfo->tm_hour,timeinfo->tm_min,timeinfo->tm_sec);
+ }
+#endif
+ 
 
 //*****************
 //* z80operations *
@@ -97,45 +135,51 @@ unsigned char isActiveINT(void)
 
 unsigned char Z80_breakpoint(unsigned short int address, unsigned char opcode)
 {
-    // Emulate CP/M Syscall at address 5
-    int contStr;
-
-    switch (REG_C)
-    {
-        case 0: // BDOS 0 System Reset
-        {
-            printf("Z80 reset after %u t-states\n",tstates);         
-            finish = true;
-            break;
-        }
-        case 2: // BDOS 2 console char output
-        {
-            printf("%c",(char)REG_E);
-            break;
-        }
-        case 9: // BDOS 9 console string output (string terminated by "$")
-        {
-            uint16_t strAddr = REG_DE;
-            ShowTime();
-            contStr=0;
-            while (z80Ram[strAddr] != '$') {
-                printf("%c",(char)z80Ram[strAddr]);
-                strAddr++;
-                contStr++;
-                if (contStr>32)
-                 break;
-            }         
-            break;
-        }
-        default:
-        {
-            printf("BDOS Call %c\n",REG_C);
-            finish = true;
-            break;
-        }
+ // Emulate CP/M Syscall at address 5
+ unsigned char contStr;
+ switch (REG_C)
+ {
+  case 0: // BDOS 0 System Reset
+  {
+   printf("Z80 reset after %u t-states\n",tstates);
+   finish = true;
+   break;
+  }
+  case 2: // BDOS 2 console char output
+  {
+   putchar((char)REG_E);
+   break;
+  }
+  case 9: // BDOS 9 console string output (string terminated by "$")
+  {
+   uint16_t strAddr = REG_DE;
+   #if defined(cfg_use_time_show) && defined(cfg_use_time_per_line)
+    ShowTime();
+   #endif 
+   contStr=0;
+   cadLog[0]='\0';
+   while (z80Ram[strAddr] != '$')
+   {
+    cadLog[contStr]= (char)z80Ram[strAddr];
+    strAddr++;
+    contStr++;
+    if (contStr>32){
+     break;
     }
-    // opcode would be modified before the decodeOpcode method
-    return opcode;
+   }
+   cadLog[contStr]='\0';
+   printf("%s",cadLog);
+   break;
+  }
+  default:
+  {
+   printf("BDOS Call %c\n",REG_C);
+   finish = true;
+   break;
+  }
+ }
+ // opcode would be modified before the decodeOpcode method
+ return opcode;
 }
 
 
@@ -146,7 +190,7 @@ unsigned char Z80_breakpoint(unsigned short int address, unsigned char opcode)
 
 
 
-void runTest() 
+void runTest()
 {
  Z80Init();
  tstates=0;
@@ -159,8 +203,7 @@ void runTest()
  z80Ram[1] = 0x00;
  z80Ram[2] = 0x01; // JP 0x100 CP/M TPA
  z80Ram[5] = (uint8_t) 0xC9; // Return from BDOS call
-    
-    
+
  while (!finish)
  {
   execute();
@@ -173,6 +216,13 @@ void runTest()
 //********
 int main(int argc, char *argv[])
 {
- runTest();
+ #if defined(cfg_use_time_show) && !defined(cfg_use_time_per_line)
+  ShowTime();
+  runTest();
+  ShowTime();
+ #else
+  runTest();
+ #endif
+  
  return 0;
 }

@@ -5,7 +5,10 @@
 //... commit c4f267e3564fa89bd88fd2d1d322f4d6b0069dbd
 //... GPL 3
 //... v1.0.0 (13/02/2017)
-//    quick & dirty conversion by dddddd (AKA deesix)
+//    quick & dirty conversion by dddddd (AKA deesix) 
+//#ifndef _Z80_C
+// #define _Z80_C
+#include "gbConfig.h"
 #include "gbGlobal.h"
 #include "z80.h"
 #include <string.h>
@@ -23,11 +26,16 @@ const unsigned char Z80_HALFCARRY_MASK = 0x10;
 const unsigned char Z80_BIT5_MASK = 0x20;
 const unsigned char Z80_ZERO_MASK = 0x40;
 const unsigned char Z80_SIGN_MASK = 0x80;
-const unsigned char Z80_FLAG_53_MASK = Z80_BIT5_MASK | Z80_BIT3_MASK;
-const unsigned char Z80_FLAG_SZ_MASK = Z80_SIGN_MASK | Z80_ZERO_MASK;
-const unsigned char Z80_FLAG_SZHN_MASK = Z80_FLAG_SZ_MASK | Z80_HALFCARRY_MASK | Z80_ADDSUB_MASK;
-const unsigned char Z80_FLAG_SZP_MASK = Z80_FLAG_SZ_MASK | Z80_PARITY_MASK;
-const unsigned char Z80_FLAG_SZHP_MASK = Z80_FLAG_SZP_MASK | Z80_HALFCARRY_MASK; 
+//const unsigned char Z80_FLAG_53_MASK = Z80_BIT5_MASK | Z80_BIT3_MASK;
+//const unsigned char Z80_FLAG_SZ_MASK = Z80_SIGN_MASK | Z80_ZERO_MASK;
+//const unsigned char Z80_FLAG_SZHN_MASK = Z80_FLAG_SZ_MASK | Z80_HALFCARRY_MASK | Z80_ADDSUB_MASK;
+//const unsigned char Z80_FLAG_SZP_MASK = Z80_FLAG_SZ_MASK | Z80_PARITY_MASK;
+//const unsigned char Z80_FLAG_SZHP_MASK = Z80_FLAG_SZP_MASK | Z80_HALFCARRY_MASK; 
+const unsigned char Z80_FLAG_53_MASK = 0x20 | 0x08; //C POSIX
+const unsigned char Z80_FLAG_SZ_MASK = 0x80 | 0x40; //C POSIX
+const unsigned char Z80_FLAG_SZHN_MASK = (0x80 | 0x40) | 0x10 | 0x02; //C POSIX
+const unsigned char Z80_FLAG_SZP_MASK = (0x80 | 0x40) | 0x04; //C POSIX
+const unsigned char Z80_FLAG_SZHP_MASK = ((0x80 | 0x40) | 0x04) | 0x10; //C POSIX
 unsigned char Z80_regA;
 unsigned char Z80_sz5h3pnFlags;
 unsigned char Z80_carryFlag;
@@ -59,56 +67,130 @@ unsigned char Z80_sz53pn_subTable[256];
 #endif 
 
 
-inline unsigned char fast_getRegA(){ return Z80_regA; }
-inline void fast_setRegA(unsigned char value) { Z80_regA = value; }
+#ifdef cfg_use_direct_RegA
+ #define fast_getRegA() regA
+ #define fast_setRegA(a) regA=a
+#else
+ inline unsigned char fast_getRegA(){ return Z80_regA; }
+ inline void fast_setRegA(unsigned char value) { Z80_regA = value; }
+#endif 
 
-inline unsigned char fast_getRegB() { return REG_B; }
-inline void fast_setRegB(unsigned char value) { REG_B = value; }
+#ifdef cfg_use_direct_RegB
+ #define fast_getRegB() REG_B
+ #define fast_setRegB(a) REG_B=a
+#else
+ inline unsigned char fast_getRegB() { return REG_B; }
+ inline void fast_setRegB(unsigned char value) { REG_B = value; }
+#endif 
 
-inline unsigned char fast_getRegC() { return REG_C; }
-inline void fast_setRegC(unsigned char value) { REG_C = value; }
+#ifdef cfg_use_direct_RegC
+ #define fast_getRegC() REG_C
+ #define fast_setRegC(a) REG_C=a
+#else
+ inline unsigned char fast_getRegC() { return REG_C; }
+ inline void fast_setRegC(unsigned char value) { REG_C = value; }
+#endif 
 
-inline unsigned char fast_getRegD() { return REG_D; }
-inline void fast_setRegD(unsigned char value) { REG_D = value; }
+#ifdef cfg_use_direct_RegD
+ #define fast_getRegD() REG_D
+ #define fast_setRegD(a) REG_D=a
+#else
+ inline unsigned char fast_getRegD() { return REG_D; }
+ inline void fast_setRegD(unsigned char value) { REG_D = value; }
+#endif 
 
-inline unsigned char fast_getRegE() { return REG_E; }
-inline void fast_setRegE(unsigned char value) { REG_E = value; }
+#ifdef cfg_use_direct_RegE
+ #define fast_getRegE() REG_E
+ #define fast_setRegE(a) REG_E=a
+#else
+ inline unsigned char fast_getRegE() { return REG_E; }
+ inline void fast_setRegE(unsigned char value) { REG_E = value; }
+#endif 
 
-inline unsigned char fast_getRegH() { return REG_H; }
-inline void fast_setRegH(unsigned char value) { REG_H = value; }
+#ifdef cfg_use_direct_RegH
+ #define fast_getRegH() REG_H
+ #define fast_setRegH(a) REG_H=a
+#else
+ inline unsigned char fast_getRegH() { return REG_H; }
+ inline void fast_setRegH(unsigned char value) { REG_H = value; }
+#endif 
 
-inline unsigned char fast_getRegL() { return REG_L; }
-inline void fast_setRegL(unsigned char value) { REG_L = value; }
+#ifdef cfg_use_direct_RegL
+ #define fast_getRegL() REG_L
+ #define fast_setRegL(a) REG_L=a
+#else
+ inline unsigned char fast_getRegL() { return REG_L; }
+ inline void fast_setRegL(unsigned char value) { REG_L = value; }
+#endif 
 
 
 
 
 
 
+#ifdef cfg_use_direct_REG_Ax
+ #define fast_getRegAx() REG_Ax
+ #define fast_setRegAx(a) REG_Ax=a
+#else
+ inline unsigned char fast_getRegAx() { return REG_Ax; }
+ inline void fast_setRegAx(unsigned char value) { REG_Ax = value; }
+#endif
 
-inline unsigned char fast_getRegAx() { return REG_Ax; }
-inline void fast_setRegAx(unsigned char value) { REG_Ax = value; }
+#ifdef cfg_use_direct_REG_Fx
+ #define fast_getRegFx() REG_Fx
+ #define fast_setRegFx(a) REG_Fx=a
+#else
+ inline unsigned char fast_getRegFx() { return REG_Fx; }
+ inline void fast_setRegFx(unsigned char value) { REG_Fx = value; }
+#endif 
 
-inline unsigned char fast_getRegFx() { return REG_Fx; }
-inline void fast_setRegFx(unsigned char value) { REG_Fx = value; }
+#ifdef cfg_use_direct_REG_Bx
+ #define fast_getRegBx() REG_Bx
+ #define fast_setRegBx(a) REG_Bx=a
+#else
+ inline unsigned char fast_getRegBx() { return REG_Bx; }
+ inline void fast_setRegBx(unsigned char value) { REG_Bx = value; }
+#endif 
 
-inline unsigned char fast_getRegBx() { return REG_Bx; }
-inline void fast_setRegBx(unsigned char value) { REG_Bx = value; }
+#ifdef cfg_use_direct_REG_Cx
+ #define fast_getRegCx() REG_Cx
+ #define fast_setRegCx(a) REG_Cx=a
+#else
+ inline unsigned char fast_getRegCx() { return REG_Cx; }
+ inline void fast_setRegCx(unsigned char value) { REG_Cx = value; }
+#endif 
 
-inline unsigned char fast_getRegCx() { return REG_Cx; }
-inline void fast_setRegCx(unsigned char value) { REG_Cx = value; }
+#ifdef cfg_use_direct_REG_Dx
+ #define fast_getRegDx() REG_Dx
+ #define fast_setRegDx(a) REG_Dx=a
+#else
+ inline unsigned char fast_getRegDx() { return REG_Dx; }
+ inline void fast_setRegDx(unsigned char value) { REG_Dx = value; }
+#endif 
 
-inline unsigned char fast_getRegDx() { return REG_Dx; }
-inline void fast_setRegDx(unsigned char value) { REG_Dx = value; }
+#ifdef cfg_use_direct_REG_Ex
+ #define fast_getRegEx() REG_Ex
+ #define fast_setRegEx(a) REG_Ex=a
+#else
+ inline unsigned char fast_getRegEx() { return REG_Ex; }
+ inline void fast_setRegEx(unsigned char value) { REG_Ex = value; }
+#endif 
 
-inline unsigned char fast_getRegEx() { return REG_Ex; }
-inline void fast_setRegEx(unsigned char value) { REG_Ex = value; }
+#ifdef cfg_use_direct_REG_Hx
+ #define fast_getRegHx() REG_Hx
+ #define fast_setRegHx(a) REG_Hx=a
+#else
+ inline unsigned char fast_getRegHx() { return REG_Hx; }
+ inline void fast_setRegHx(unsigned char value) { REG_Hx = value; }
+#endif 
 
-inline unsigned char fast_getRegHx() { return REG_Hx; }
-inline void fast_setRegHx(unsigned char value) { REG_Hx = value; }
-
-inline unsigned char fast_getRegLx() { return REG_Lx; }
-inline void fast_setRegLx(unsigned char value) { REG_Lx = value; }
+#ifdef cfg_use_direct_REG_Lx
+ #define fast_getRegLx() REG_Lx
+ #define fast_setRegLx(a) REG_Lx=a
+#else
+ inline unsigned char fast_getRegLx() { return REG_Lx; }
+ inline void fast_setRegLx(unsigned char value) { REG_Lx = value; }
+#endif 
 
 
 
@@ -117,54 +199,123 @@ inline void fast_setRegLx(unsigned char value) { REG_Lx = value; }
 inline unsigned short int fast_getRegAF() { return (Z80_regA << 8) | (Z80_carryFlag ? Z80_sz5h3pnFlags | Z80_CARRY_MASK : Z80_sz5h3pnFlags); }
 inline void fast_setRegAF(unsigned short int word) { Z80_regA = word >> 8; Z80_sz5h3pnFlags = word & 0xfe; Z80_carryFlag = (word & Z80_CARRY_MASK) != 0; }
 
-inline unsigned short int fast_getRegAFx() { return REG_AFx; }
-inline void fast_setRegAFx(unsigned short int word) { REG_AFx = word; }
+#ifdef cfg_use_direct_REG_AFx
+ #define fast_getRegAFx() REG_AFx
+ #define fast_setRegAFx(a) REG_AFx=a
+#else
+ inline unsigned short int fast_getRegAFx() { return REG_AFx; }
+ inline void fast_setRegAFx(unsigned short int word) { REG_AFx = word; }
+#endif 
 
-inline unsigned short int fast_getRegBC() { return REG_BC; }
-inline void fast_setRegBC(unsigned short int word) { REG_BC = word; }
+#ifdef cfg_use_direct_REG_BC
+ #define fast_getRegBC() REG_BC
+ #define fast_setRegBC(a) REG_BC=a
+#else
+ inline unsigned short int fast_getRegBC() { return REG_BC; }
+ inline void fast_setRegBC(unsigned short int word) { REG_BC = word; }
+#endif 
 
-inline unsigned short int fast_getRegBCx() { return REG_BCx; }
-inline void fast_setRegBCx(unsigned short int word) { REG_BCx = word; }
+#ifdef cfg_use_direct_REG_BCx
+ #define fast_getRegBCx() REG_BCx
+ #define fast_setRegBCx(a) REG_BCx=a
+#else
+ inline unsigned short int fast_getRegBCx() { return REG_BCx; }
+ inline void fast_setRegBCx(unsigned short int word) { REG_BCx = word; }
+#endif 
 
-inline unsigned short int fast_getRegDE() { return REG_DE; }
-inline void fast_setRegDE(unsigned short int word) { REG_DE = word; }
+#ifdef cfg_use_direct_REG_DE
+ #define fast_getRegDE() REG_DE
+ #define fast_setRegDE(a) REG_DE=a
+#else
+ inline unsigned short int fast_getRegDE() { return REG_DE; }
+ inline void fast_setRegDE(unsigned short int word) { REG_DE = word; }
+#endif 
 
-inline unsigned short int fast_getRegDEx() { return REG_DEx; }
-inline void fast_setRegDEx(unsigned short int word) { REG_DEx = word; }
+#ifdef cfg_use_direct_REG_DEx
+ #define fast_getRegDEx() REG_DEx
+ #define fast_setRegDEx(a) REG_DEx=a
+#else
+ inline unsigned short int fast_getRegDEx() { return REG_DEx; }
+ inline void fast_setRegDEx(unsigned short int word) { REG_DEx = word; }
+#endif 
 
-unsigned short int fast_getRegHL() { return REG_HL; }
-void fast_setRegHL(unsigned short int word) { REG_HL = word; }
+#ifdef cfg_use_direct_REG_HL
+ #define fast_getRegHL() REG_HL
+ #define fast_setRegHL(a) REG_HL=a
+#else
+ unsigned short int fast_getRegHL() { return REG_HL; }
+ void fast_setRegHL(unsigned short int word) { REG_HL = word; }
+#endif 
 
-inline unsigned short int fast_getRegHLx() { return REG_HLx; }
-inline void fast_setRegHLx(unsigned short int word) { REG_HLx = word; }
+#ifdef cfg_use_direct_REG_HLx
+ #define fast_getRegHLx() REG_HLx
+ #define fast_setRegHLx(a) REG_HLx=a
+#else
+ inline unsigned short int fast_getRegHLx() { return REG_HLx; }
+ inline void fast_setRegHLx(unsigned short int word) { REG_HLx = word; }
+#endif 
 
 
 
 
+#ifdef cfg_use_direct_REG_PC
+ #define fast_getRegPC() REG_PC
+ #define fast_setRegPC(a) REG_PC=a
+#else
+ inline unsigned short int fast_getRegPC() { return REG_PC; }
+ inline void fast_setRegPC(unsigned short int address) { REG_PC = address; }
+#endif 
 
-inline unsigned short int fast_getRegPC() { return REG_PC; }
-inline void fast_setRegPC(unsigned short int address) { REG_PC = address; }
+#ifdef cfg_use_direct_REG_SP
+ #define fast_getRegSP() REG_SP
+ #define fast_setRegSP(a) REG_SP=a
+#else
+ inline unsigned short int fast_getRegSP() { return REG_SP; }
+ inline void fast_setRegSP(unsigned short int word) { REG_SP = word; }
+#endif 
 
-inline unsigned short int fast_getRegSP() { return REG_SP; }
-inline void fast_setRegSP(unsigned short int word) { REG_SP = word; }
+#ifdef cfg_use_direct_REG_IX
+ #define fast_getRegIX() REG_IX
+ #define fast_setRegIX(a) REG_IX=a
+#else
+ inline unsigned short int fast_getRegIX() { return REG_IX; }
+ inline void fast_setRegIX(unsigned short int word) { REG_IX = word; }
+#endif 
 
-inline unsigned short int fast_getRegIX() { return REG_IX; }
-inline void fast_setRegIX(unsigned short int word) { REG_IX = word; }
+#ifdef cfg_use_direct_REG_IY
+ #define fast_getRegIY() REG_IY
+ #define fast_setRegIY(a) REG_IY=a
+#else
+ inline unsigned short int fast_getRegIY() { return REG_IY; }
+ inline void fast_setRegIY(unsigned short int word) { REG_IY = word; }
+#endif 
 
-inline unsigned short int fast_getRegIY() { return REG_IY; }
-inline void fast_setRegIY(unsigned short int word) { REG_IY = word; }
-
-inline unsigned char fast_getRegI() { return Z80_regI; }
-inline void fast_setRegI(unsigned char value) { Z80_regI = value; }
+#ifdef cfg_use_direct_REG_I
+ #define fast_getRegI() Z80_regI
+ #define fast_setRegI(a) Z80_regI=a
+#else
+ inline unsigned char fast_getRegI() { return Z80_regI; }
+ inline void fast_setRegI(unsigned char value) { Z80_regI = value; }
+#endif 
 
 inline unsigned char fast_getRegR() { return Z80_regRbit7 ? Z80_regR | Z80_SIGN_MASK : Z80_regR & 0x7f; }
 inline void fast_setRegR(unsigned char value) { Z80_regR = value & 0x7f; Z80_regRbit7 = (value > 0x7f); }
 
-inline unsigned short int fast_getMemPtr() { return REG_WZ; }
-inline void fast_setMemPtr(unsigned short int word) { REG_WZ = word; }
+#ifdef cfg_use_direct_MemPtr
+ #define fast_getMemPtr() REG_WZ
+ #define fast_setMemPtr(a) REG_WZ=a
+#else
+ inline unsigned short int fast_getMemPtr() { return REG_WZ; }
+ inline void fast_setMemPtr(unsigned short int word) { REG_WZ = word; }
+#endif 
 
-inline unsigned char fast_isCarryFlag() { return Z80_carryFlag; }
-inline void fast_setCarryFlag(unsigned char state) { Z80_carryFlag = state; }
+#ifdef cfg_use_direct_CarryFlag
+ #define fast_isCarryFlag() Z80_carryFlag
+ #define fast_setCarryFlag(a) Z80_carryFlag=a
+#else
+ inline unsigned char fast_isCarryFlag() { return Z80_carryFlag; }
+ inline void fast_setCarryFlag(unsigned char state) { Z80_carryFlag = state; }
+#endif 
 
 inline unsigned char fast_isAddSubFlag() { return (Z80_sz5h3pnFlags & Z80_ADDSUB_MASK) != 0; }
 inline void fast_setAddSubFlag(unsigned char state);
@@ -193,31 +344,65 @@ inline void fast_setFlags(unsigned char regF) { Z80_sz5h3pnFlags = regF & 0xfe; 
 
 
 
+#ifdef cfg_use_direct_IFF1
+ #define fast_isIFF1() Z80_ffIFF1
+ #define fast_setIFF1(a) Z80_ffIFF1=a
+#else
+ inline unsigned char fast_isIFF1() { return Z80_ffIFF1; }
+ inline void fast_setIFF1(unsigned char state) { Z80_ffIFF1 = state; }
+#endif 
 
-inline unsigned char fast_isIFF1() { return Z80_ffIFF1; }
-inline void fast_setIFF1(unsigned char state) { Z80_ffIFF1 = state; }
+#ifdef cfg_use_direct_IFF2
+ #define fast_isIFF2() Z80_ffIFF2
+ #define fast_setIFF2(a) Z80_ffIFF2=a
+#else
+ inline unsigned char fast_isIFF2() { return Z80_ffIFF2; }
+ inline void fast_setIFF2(unsigned char state) { Z80_ffIFF2 = state; }
+#endif 
 
-inline unsigned char fast_isIFF2() { return Z80_ffIFF2; }
-inline void fast_setIFF2(unsigned char state) { Z80_ffIFF2 = state; }
-
-inline unsigned char fast_isNMI() { return Z80_activeNMI; }
-inline void fast_setNMI(unsigned char nmi) { Z80_activeNMI = nmi; }
+#ifdef cfg_use_direct_NMI
+ #define fast_isNMI() Z80_activeNMI
+ #define fast_setNMI(a) Z80_activeNMI=a
+#else
+ inline unsigned char fast_isNMI() { return Z80_activeNMI; }
+ inline void fast_setNMI(unsigned char nmi) { Z80_activeNMI = nmi; }
+#endif 
     
-inline void fast_triggerNMI() { Z80_activeNMI = true; }
-    
-inline unsigned char fast_getIM() { return Z80_modeINT; }
-inline void fast_setIM(unsigned char mode) { Z80_modeINT = mode; }        
+#ifdef cfg_use_direct_triggerNMI
+ #define fast_triggerNMI() Z80_activeNMI = true
+#else    
+ inline void fast_triggerNMI() { Z80_activeNMI = true; }
+#endif 
 
-inline unsigned char fast_isHalted() { return Z80_halted; }
-inline void fast_setHalted(unsigned char state) { Z80_halted = state; }
-    
-inline void fast_setPinReset() { Z80_pinReset = true; }
+#ifdef cfg_use_direct_IM
+ #define fast_getIM() Z80_modeINT
+ #define fast_setIM(a) Z80_modeINT=a
+#else
+ inline unsigned char fast_getIM() { return Z80_modeINT; }
+ inline void fast_setIM(unsigned char mode) { Z80_modeINT = mode; }        
+#endif 
 
-inline unsigned char fast_isPendingEI() { return Z80_pendingEI; }
-inline void fast_setPendingEI(unsigned char state) { Z80_pendingEI = state; }
+#ifdef cfg_use_direct_Halted
+ #define fast_isHalted() Z80_halted
+ #define fast_setHalted(a) Z80_halted=a
+#else
+ inline unsigned char fast_isHalted() { return Z80_halted; }
+ inline void fast_setHalted(unsigned char state) { Z80_halted = state; }
+#endif 
 
+#ifdef cfg_use_direct_PinReset
+ #define fast_setPinReset() Z80_pinReset=true
+#else    
+ inline void fast_setPinReset() { Z80_pinReset = true; }
+#endif 
 
-
+#ifdef cfg_use_direct_PendingEI
+ #define fast_isPendingEI() Z80_pendingEI
+ #define fast_setPendingEI(a) Z80_pendingEI=a
+#else    
+ inline unsigned char fast_isPendingEI() { return Z80_pendingEI; }
+ inline void fast_setPendingEI(unsigned char state) { Z80_pendingEI = state; }
+#endif 
 
 
 
@@ -225,20 +410,25 @@ inline void fast_setPendingEI(unsigned char state) { Z80_pendingEI = state; }
 void Z80Init()
 {
  unsigned char evenBits;
+ unsigned int idx;
+ unsigned char mask;
  memset(Z80_sz53n_addTable,0,256);
  memset(Z80_sz53pn_addTable,0,256);
  memset(Z80_sz53n_subTable,0,256);
  memset(Z80_sz53pn_subTable,0,256);
 
 
-    for (unsigned int idx = 0; idx < 256; idx++) {
-
+    //for (unsigned int idx = 0; idx < 256; idx++)
+    for (idx = 0; idx < 256; idx=idx+1) //C POSIX
+    {
         if (idx > 0x7f) {
             Z80_sz53n_addTable[idx] |= Z80_SIGN_MASK;
         }
 
         evenBits = true;
-        for (unsigned char mask = 0x01; mask != 0; mask <<= 1) {
+        //for (unsigned char mask = 0x01; mask != 0; mask <<= 1) //C POSIX
+        for (mask = 0x01; mask != 0; mask <<= 1)
+        {
             if ((idx & mask) != 0) {
                 evenBits = !evenBits;
             }
@@ -264,6 +454,7 @@ void Z80Init()
     Z80_execDone = false;
     reset();                
 }
+
 
 
 
@@ -335,7 +526,9 @@ inline void setSignFlag(unsigned char state) {
 
 
 
-void reset(void) {
+
+void reset(void)
+{
     if (Z80_pinReset) {
         Z80_pinReset = false;
     } else {
@@ -366,9 +559,8 @@ void reset(void) {
     Z80_modeINT = IM0; //JJ setIM(IM0);
     lastFlagQ = false;
     Z80_prefixOpcode = 0x00;
-    //printf("RESET\n");
-    //fflush(stdout);
 }
+
 
 
 void rlc(unsigned char * oper8) {
@@ -382,7 +574,7 @@ void rlc(unsigned char * oper8) {
 }
 
 void rl(unsigned char * oper8) {
-    bool carry = Z80_carryFlag;
+    unsigned char carry = Z80_carryFlag;
     Z80_carryFlag = ((*oper8) > 0x7f);
     (*oper8) <<= 1;
     if (carry) {
@@ -688,9 +880,10 @@ void cp(unsigned char oper8) {
     flagQ = true;
 }
 
-void daa(void) {
+void daa(void)
+{
     unsigned char suma = 0;
-    bool carry = Z80_carryFlag;
+    unsigned char carry = Z80_carryFlag;
 
     if ((Z80_sz5h3pnFlags & Z80_HALFCARRY_MASK) != 0 || (Z80_regA & 0x0f) > 0x09) {
         suma = 6;
@@ -776,7 +969,7 @@ void ldd(void) {
 // CPI
 void cpi(void) {
     unsigned char memHL = peek8(REG_HL);
-    bool carry = Z80_carryFlag; // lo guardo porque cp lo toca
+    unsigned char carry = Z80_carryFlag; // lo guardo porque cp lo toca
     cp(memHL);
     Z80_carryFlag = carry;
     addressOnBus(REG_HL, 5);
@@ -800,7 +993,7 @@ void cpi(void) {
 // CPD
 void cpd(void) {
     unsigned char memHL = peek8(REG_HL);
-    bool carry = Z80_carryFlag; // lo guardo porque cp lo toca
+    unsigned char carry = Z80_carryFlag; // lo guardo porque cp lo toca
     cp(memHL);
     Z80_carryFlag = carry;
     addressOnBus(REG_HL, 5);
@@ -1222,7 +1415,7 @@ void decodeOpcode(uint8_t opCode)
         }
         case 0x17:
         { /* RLA */
-            bool oldCarry = Z80_carryFlag;
+            unsigned char oldCarry = Z80_carryFlag;
             Z80_carryFlag = Z80_regA > 0x7f;
             Z80_regA <<= 1;
             if (oldCarry) {
@@ -1275,7 +1468,7 @@ void decodeOpcode(uint8_t opCode)
         }
         case 0x1F:
         { /* RRA */
-            bool oldCarry = Z80_carryFlag;
+            unsigned char oldCarry = Z80_carryFlag;
             Z80_carryFlag = (Z80_regA & Z80_CARRY_MASK) != 0;
             Z80_regA >>= 1;
             if (oldCarry) {
@@ -5738,3 +5931,7 @@ void setPendingEI(unsigned char state) { Z80_pendingEI = state; }
   Z80_breakpointEnabled = state;
  }
 #endif
+
+
+//#endif
+

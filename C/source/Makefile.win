@@ -7,7 +7,7 @@ WINDRES = windres.exe
 RES  = 
 OBJ  = sim.o z80.o $(RES)
 LINKOBJ  = sim.o z80.o $(RES)
-LIBS =  -L"H:/compi/Dev-CppSDL/lib" -s -O2  
+LIBS =  -L"H:/compi/Dev-CppSDL/lib" -s -O2 -std=C89  
 INCS =  -I"H:/compi/Dev-CppSDL/include" 
 CXXINCS =  -I"H:/compi/Dev-CppSDL/lib/gcc/mingw32/3.4.2/include"  -I"H:/compi/Dev-CppSDL/include/c++/3.4.2/backward"  -I"H:/compi/Dev-CppSDL/include/c++/3.4.2/mingw32"  -I"H:/compi/Dev-CppSDL/include/c++/3.4.2"  -I"H:/compi/Dev-CppSDL/include" 
 BIN  = CoreC.exe
@@ -27,7 +27,7 @@ $(BIN): $(OBJ)
 	$(CPP) $(LINKOBJ) -o "CoreC.exe" $(LIBS)
 
 sim.o: sim.c
-	$(CPP) -c sim.c -o sim.o $(CXXFLAGS)
+	$(CC) -c sim.c -o sim.o $(CFLAGS)
 
 z80.o: z80.c
-	$(CPP) -c z80.c -o z80.o $(CXXFLAGS)
+	$(CC) -c z80.c -o z80.o $(CFLAGS)

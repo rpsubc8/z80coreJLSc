@@ -1,7 +1,9 @@
 #ifndef _GB_GLOBAL_H
  #define _GB_GLOBAL_H
  
- 
+#include "gbConfig.h" 
+
+
  //Inicio Z80_H
  typedef union 
  {
@@ -62,12 +64,28 @@
  //Fin Z80_H
 
  
- //Inicio simulador
- //extern unsigned long tstates;
- extern unsigned int tstates;
- extern unsigned char z80Ram[0x10000];
- extern unsigned char z80Ports[0x10000];
- extern unsigned char finish;
+ //Inicio simulador 
+ #ifdef cfg_use_tstates_64bits
+  #ifndef cfg_use_time_fast
+   extern unsigned long tstates;
+  #endif 
+ #else
+  #ifndef cfg_use_time_fast
+   extern unsigned int tstates;
+  #endif
+ #endif
+  
+ #ifndef cfg_use_z80RAM_fast
+  extern unsigned char z80Ram[0x10000];
+ #endif 
+ 
+ #ifndef cfg_use_z80Ports_fast
+  extern unsigned char z80Ports[0x10000];
+ #endif 
+ 
+ #ifndef cfg_use_finish_fast
+  extern unsigned char finish;
+ #endif 
  //Fin simulador
 
 #endif

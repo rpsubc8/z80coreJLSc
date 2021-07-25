@@ -10,6 +10,7 @@
 #ifndef _Z80_H
  #define _Z80_H
 
+#include "gbConfig.h"
 #include "gbGlobal.h"
 
 #define uint8_t unsigned char
@@ -374,8 +375,6 @@ void interruptHandlingTime(int wstates);
 unsigned char isActiveINT(void);
 
 unsigned char Z80_breakpoint(unsigned short int address, unsigned char opcode);
-
-
 
 
 
