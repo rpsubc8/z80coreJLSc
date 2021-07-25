@@ -1,6 +1,9 @@
 #ifndef _GB_GBCONFIG_H
  #define _GB_GBCONFIG_H
 
+//#define cfg_use_big_endian
+//WITH_BREAKPOINT_SUPPORT
+
 //Timer options
 #define cfg_use_time_show
 //#define cfg_use_time_per_line

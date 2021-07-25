@@ -5,12 +5,18 @@
 
 
  //Inicio Z80_H
- typedef union 
+ typedef union
  {
-  struct {
-   unsigned char lo, hi;
-  } byte8;
-  unsigned short int word;
+  #ifdef cfg_use_big_endian
+   struct {
+    unsigned char hi, lo;
+   } byte8;  
+  #else
+   struct {
+    unsigned char lo, hi;
+   } byte8;
+  #endif
+  unsigned short int word;   
  } RegisterPair;
  
  extern unsigned char Z80_opCode;
