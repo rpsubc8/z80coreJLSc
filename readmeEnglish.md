@@ -83,6 +83,8 @@ When finished, if all goes well, it will look something like the following:
 <h1>Options</h1>
 Several setting options are allowed in the gbConfig.h file:
 <ul>
+ <li><b>cfg_use_big_endian</b>: Big endian support</li>
+ <li><b>WITH_BREAKPOINT_SUPPORT</b>: Allows debugging</li> 
  <li><b>cfg_use_time_show</b>: Displays the times</li>
  <li><b>cfg_use_time_per_line</b>: Displays the time in each execution line.</li>
  <li><b>cfg_use_tstates_64bits</b>: Declares the 64-bit timing variable.</li>
