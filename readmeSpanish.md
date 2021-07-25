@@ -2,7 +2,7 @@
 He realizado una conversión rápida del core del Z80 de José Luis Sánchez a C (no POSIX) en normativa STD(C89).
 El proyecto original en C++ es de Jose Luis Sánchez. Yo tan sólo he realizado una conversión a C, para que
  sirva de plantilla en otras plataformas y compiladores de recursos más reducidos.<br>
-Esta versión modificada sólo permite usar un único core de Z80, característica que si tenía el proyecto original.
+Esta versión modificada sólo permite usar un único core de Z80, en lugar de múltiples, característica que si tenía el proyecto original.
 
 <br><br>
 <h1>Proyecto original</h1>
