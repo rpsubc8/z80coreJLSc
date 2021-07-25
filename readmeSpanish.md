@@ -94,7 +94,7 @@ Se permiten varias opciones de ajustes en el fichero gbConfig.h:
  <li><b>cfg_use_finish_fast</b>: Variable de ejecución declarada en modo rápido (ESP32).</li>
  <li><b>cfg_use_z80RAM_fast</b>: El array de RAM en modo rápido (ESP32)</li>
  <li><b>cfg_use_z80Ports_fast</b>: El array de puertos en modo rápido (ESP32)</li>
- <li><b>#define cfg_use_time_fast</b>: El acceso al timer en modo rápido (ESP32)</li>
+ <li><b>cfg_use_time_fast</b>: El acceso al timer en modo rápido (ESP32)</li>
 </ul>
 
 
