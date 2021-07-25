@@ -98,5 +98,83 @@ Several setting options are allowed in the gbConfig.h file:
 </ul>
 
 
-
+<br><br>
+<h1>ESP32</h1>
+I have left a project for ESP32 (sourceESP32), for a quick test.<br>
+The port memory has been left at 8192 bytes, which is good for testing purposes.<br>
+The output is through the serial port, through which we can monitor.
+<pre>
+15:50:13.123 -> BEGIN Test
+15:50:13.123 ->  (00:00:00) Z80all instruction exerciser
+15:50:13.123 -> <adc,sbc> hl,<bc,de,hl,sp>....  OK
+15:54:23.087 -> add hl,<bc,de,hl,sp>..........  OK
+15:56:27.501 -> add ix,<bc,de,ix,sp>..........  OK
+15:58:31.963 -> add iy,<bc,de,iy,sp>..........  OK
+16:00:36.416 -> aluop a,nn....................  OK
+16:01:39.342 -> aluop a,<b,c,d,e,h,l,(hl),a>..  OK
+16:38:21.948 -> aluop a,<ixh,ixl,iyh,iyl>.....  OK
+16:57:04.702 -> aluop a,(<ix,iy>+1)...........  OK
+17:06:31.325 -> bit n,(<ix,iy>+1).............  OK
+17:06:35.739 -> bit n,<b,c,d,e,h,l,(hl),a>....  OK
+17:08:57.614 -> cpd<r>........................  OK
+17:09:25.270 -> cpi<r>........................  OK
+17:09:52.965 -> <daa,cpl,scf,ccf>.............  OK
+17:11:54.128 -> <inc,dec> a...................  OK
+17:12:00.667 -> <inc,dec> b...................  OK
+17:12:07.207 -> <inc,dec> bc..................  OK
+17:12:10.582 -> <inc,dec> c...................  OK
+17:12:17.121 -> <inc,dec> d...................  OK
+17:12:23.682 -> <inc,dec> de..................  OK
+17:12:27.041 -> <inc,dec> e...................  OK
+17:12:33.574 -> <inc,dec> h...................  OK
+17:12:40.136 -> <inc,dec> hl..................  OK
+17:12:43.496 -> <inc,dec> ix..................  OK
+17:12:46.894 -> <inc,dec> iy..................  OK
+17:12:50.253 -> <inc,dec> l...................  OK
+17:12:56.777 -> <inc,dec> (hl)................  OK
+17:13:03.339 -> <inc,dec> sp..................  OK
+17:13:06.699 -> <inc,dec> (<ix,iy>+1).........  OK
+17:13:20.410 -> <inc,dec> ixh.................  OK
+17:13:26.972 -> <inc,dec> ixl.................  OK
+17:13:33.496 -> <inc,dec> iyh.................  OK
+17:13:40.058 -> <inc,dec> iyl.................  OK
+17:13:46.621 -> ld <bc,de>,(nnnn).............  OK
+17:13:46.660 -> ld hl,(nnnn)..................  OK
+17:13:46.699 -> ld sp,(nnnn)..................  OK
+17:13:46.738 -> ld <ix,iy>,(nnnn).............  OK
+17:13:46.816 -> ld (nnnn),<bc,de>.............  OK
+17:13:46.933 -> ld (nnnn),hl..................  OK
+17:13:46.972 -> ld (nnnn),sp..................  OK
+17:13:47.011 -> ld (nnnn),<ix,iy>.............  OK
+17:13:47.167 -> ld <bc,de,hl,sp>,nnnn.........  OK
+17:13:47.285 -> ld <ix,iy>,nnnn...............  OK
+17:13:47.363 -> ld a,<(bc),(de)>..............  OK
+17:13:47.441 -> ld <b,c,d,e,h,l,(hl),a>,nn....  OK
+17:13:47.558 -> ld (<ix,iy>+1),nn.............  OK
+17:13:47.636 -> ld <b,c,d,e>,(<ix,iy>+1)......  OK
+17:13:48.808 -> ld <h,l>,(<ix,iy>+1)..........  OK
+17:13:49.394 -> ld a,(<ix,iy>+1)..............  OK
+17:13:49.667 -> ld <ixh,ixl,iyh,iyl>,nn.......  OK
+17:13:49.707 -> ld <bcdehla>,<bcdehla>........  OK
+17:13:59.707 -> ld <bcdexya>,<bcdexya>........  OK
+17:14:20.292 -> ld a,(nnnn) / ld (nnnn),a.....  OK
+17:14:20.371 -> ldd<r> (1)....................  OK
+17:14:20.488 -> ldd<r> (2)....................  OK
+17:14:20.566 -> ldi<r> (1)....................  OK
+17:14:20.683 -> ldi<r> (2)....................  OK
+17:14:20.761 -> neg...........................  OK
+17:14:49.316 -> <rrd,rld>.....................  OK
+17:15:04.824 -> <rlca,rrca,rla,rra>...........  OK
+17:15:17.988 -> shf/rot (<ix,iy>+1)...........  OK
+17:15:18.886 -> shf/rot <b,c,d,e,h,l,(hl),a>..  OK
+17:15:39.121 -> <set,res> n,<bcdehl(hl)a>.....  OK
+17:15:59.277 -> <set,res> n,(<ix,iy>+1).......  OK
+17:16:00.214 -> ld (<ix,iy>+1),<b,c,d,e>......  OK
+17:16:02.871 -> ld (<ix,iy>+1),<h,l>..........  OK
+17:16:03.457 -> ld (<ix,iy>+1),a..............  OK
+17:16:03.574 -> ld (<bc,de>),a................  OK
+17:16:03.808 -> Tests completeZ80 reset after 3785304271 t-states
+17:16:03.808 ->  (01:25:46) END Test
+</pre>
+You can see the speed in an ESP32, 1 hour and 15 minutes of execution.
 
