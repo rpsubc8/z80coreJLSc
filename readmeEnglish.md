@@ -1,7 +1,8 @@
 # Core Z80 in C
 I have made a quick conversion of Jose Luis Sanchez's Z80 core to C (not POSIX).
 The original C++ project is by Jose Luis Sanchez. I have only made a conversion to C, to serve as a template for other platforms and compilers with smaller resources.
- Serve as a template for other platforms and compilers with smaller resources.
+ Serve as a template for other platforms and compilers with smaller resources.<br>
+This modified version only allows the use of a single Z80 core, instead of multiple ones, a feature that the original project had.
 
 <br><br>
 <h1>Original project</h1>
@@ -77,3 +78,23 @@ If we launch the simulation that simulates the CPM console output, we will get t
 <center><img src='https://raw.githubusercontent.com/rpsubc8/z80coreJLSc/main/preview/previewzxall1.gif'></center>
 When finished, if all goes well, it will look something like the following:
 <center><img src='https://raw.githubusercontent.com/rpsubc8/z80coreJLSc/main/preview/previewzxall2.gif'></center>
+
+<br><br>
+<h1>Options</h1>
+Several setting options are allowed in the gbConfig.h file:
+<ul>
+ <li><b>cfg_use_time_show</b>: Displays the times</li>
+ <li><b>cfg_use_time_per_line</b>: Displays the time in each execution line.</li>
+ <li><b>cfg_use_tstates_64bits</b>: Declares the 64-bit timing variable.</li>
+ <li><b>cfg_use_direct_RegA</b>: Quick access mode to a Z80 register.</li>
+ <li>--</li>
+ <li><b>cfg_use_direct_PendingEI</b>: Quick access mode to PendingEI.</li>
+ <li><b>cfg_use_finish_fast</b>: Execution variable declared in fast mode (ESP32).</li>
+ <li><b>cfg_use_z80RAM_fast</b>: The RAM array in fast mode (ESP32)</li>
+ <li><b>cfg_use_z80Ports_fast</b>: The port array in fast mode (ESP32)</li>
+ <li><b>#define cfg_use_time_fast</b>: Access to the timer in fast mode (ESP32)</li>
+</ul>
+
+
+
+
