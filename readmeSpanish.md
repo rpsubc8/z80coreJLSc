@@ -1,7 +1,8 @@
 # Core Z80 en C 
-He realizado una conversión rápida del core del Z80 de José Luis Sánchez a C (no POSIX).
+He realizado una conversión rápida del core del Z80 de José Luis Sánchez a C (no POSIX) en normativa STD(C89).
 El proyecto original en C++ es de Jose Luis Sánchez. Yo tan sólo he realizado una conversión a C, para que
- sirva de plantilla en otras plataformas y compiladores de recursos más reducidos.
+ sirva de plantilla en otras plataformas y compiladores de recursos más reducidos.<br>
+Esta versión modificada sólo permite usar un único core de Z80, característica que si tenía el proyecto original.
 
 <br><br>
 <h1>Proyecto original</h1>
@@ -78,3 +79,28 @@ Si lanzamos la simulación que simula la salida de consola de CPM, nos saldrá l
 <center><img src='https://raw.githubusercontent.com/rpsubc8/z80coreJLSc/main/preview/previewzxall1.gif'></center>
 Cuando termine, si todo va bien, saldrá algo como lo siguiente:
 <center><img src='https://raw.githubusercontent.com/rpsubc8/z80coreJLSc/main/preview/previewzxall2.gif'></center>
+
+
+<br><br>
+<h1>Opciones</h1>
+Se permiten varias opciones de ajustes en el fichero gbConfig.h:
+<ul>
+ <li><b>cfg_use_time_show</b>: Muestra los tiempos</li>
+ <li><b>cfg_use_time_per_line</b>: Muestra el tiempo en cada linea de ejecución.</li>
+ <li><b>cfg_use_tstates_64bits</b>: Declara la variable de temporización de 64 bits.</li>
+ <li><b>cfg_use_direct_RegA</b>: Modo de acceso rápido a un registro del Z80.</li>
+ <li>--</li>
+ <li><b>cfg_use_direct_PendingEI</b>: Modo de acceso rápido a PendingEI.</li>
+ <li><b>cfg_use_finish_fast</b>: Variable de ejecución declarada en modo rápido (ESP32).</li>
+ <li><b>cfg_use_z80RAM_fast</b>: El array de RAM en modo rápido (ESP32)</li>
+ <li><b>cfg_use_z80Ports_fast</b>: El array de puertos en modo rápido (ESP32)</li>
+ <li><b>#define cfg_use_time_fast</b>: El acceso al timer en modo rápido (ESP32)</li>
+</ul>
+
+
+
+<br><br>
+<h1>ESP32</h1>
+He dejado un proyecto para ESP32 (sourceESP32), para realizar un test rápido.<br>
+La memoria de puertos se ha dejado en 8192 bytes, que nos vale para los tests.<br>
+La salida se realiza por el puerto serie, por donde podemos monitorizar.
