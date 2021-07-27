@@ -100,7 +100,7 @@ Several setting options are allowed in the gbConfig.h file:
 
 <br><br>
 <h1>ESP32</h1>
-I have left a project for ESP32 (sourceESP32), for a quick test.<br>
+I have left a project for ESP32 (sourceESP32) prepared for Arduino IDE (1.8.11), for a quick test.<br>
 The port memory has been left at 8192 bytes, which is good for testing purposes.<br>
 The output is through the serial port, through which we can monitor.
 <pre>
