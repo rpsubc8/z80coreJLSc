@@ -179,4 +179,21 @@ La salida se realiza por el puerto serie, por donde podemos monitorizar.
 17:16:03.808 -> Tests completeZ80 reset after 3785304271 t-states
 17:16:03.808 ->  (01:25:46) END Test
 </pre>
-Se puede ver la velocidad en un ESP32, de 1 hora y 15 minutos de ejecución.
+Se puede ver la velocidad en un ESP32, de 1 hora y 25 minutos de ejecución con las opciones por defecto.<br>
+Si se seleccionan varias opciones de optimización, nos queda en (01:24:58).<br>
+
+
+<br><br>
+<h1>ESP32 fps</h1>
+Si activamos el pragma <b>cfg_use_test_fps_48k</b> en el <b>gbConfig.h</b> podremos medir los fps (cuadros por segundo), así como el tiempo en milisegundos cur (actual), min (mínimo) y max (máximo) para completar un frame en el ZX Spectrum 48K (69887 t-states).
+
+<pre>
+16:35:48.682 -> fps(135) - ms cur(7) min(7) max(7)
+16:35:49.698 -> fps(135) - ms cur(7) min(7) max(7)
+16:35:50.713 -> fps(135) - ms cur(7) min(7) max(7)
+16:35:51.690 -> fps(135) - ms cur(8) min(8) max(8)
+16:35:52.706 -> fps(135) - ms cur(8) min(8) max(8)
+16:35:53.721 -> fps(135) - ms cur(8) min(8) max(8)
+16:35:54.698 -> fps(135) - ms cur(8) min(8) max(8)
+16:35:55.713 -> fps(135) - ms cur(7) min(7) max(7)
+</pre>
