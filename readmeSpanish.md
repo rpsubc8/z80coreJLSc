@@ -103,7 +103,7 @@ Se permiten varias opciones de ajustes en el fichero gbConfig.h:
 
 <br><br>
 <h1>ESP32</h1>
-He dejado un proyecto para ESP32 (sourceESP32), para realizar un test rápido.<br>
+He dejado un proyecto para ESP32 (sourceESP32) preparado para el IDE de Arduino (1.8.11), para realizar un test rápido.<br>
 La memoria de puertos se ha dejado en 8192 bytes, que nos vale para los tests.<br>
 La salida se realiza por el puerto serie, por donde podemos monitorizar.
 <pre>
