@@ -176,8 +176,6 @@ The output is through the serial port, through which we can monitor.
 17:16:03.808 -> Tests completeZ80 reset after 3785304271 t-states
 17:16:03.808 ->  (01:25:46) END Test
 </pre>
-You can see the speed in an ESP32, 1 hour and 25 minutes of execution.
-
 You can see the speed on an ESP32, 1 hour and 25 minutes of execution with the default options.<br>
 If several optimization options are selected, we are left with (01:24:58).<br>
 
@@ -196,5 +194,3 @@ If we activate the <b>cfg_use_test_fps_48k</b> pragma in the <b>gbConfig.h</b> w
 16:35:54.698 -> fps(135) - ms cur(8) min(8) max(8)
 16:35:55.713 -> fps(135) - ms cur(7) min(7) max(7)
 </pre>
-
-
