@@ -1,3 +1,4 @@
+/*
 #ifndef _GB_GLOBAL_H
  #define _GB_GLOBAL_H
  
@@ -89,3 +90,4 @@
  //Fin simulador
 
 #endif
+*/
