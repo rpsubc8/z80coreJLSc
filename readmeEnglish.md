@@ -2,7 +2,12 @@
 I have made a quick conversion of Jose Luis Sanchez's Z80 core to C (not POSIX) in STD(C89) standard.
 The original C++ project is by Jose Luis Sanchez. I have only made a conversion to C, to serve as a template for other platforms and compilers with smaller resources.
  Serve as a template for other platforms and compilers with smaller resources.<br>
-This modified version only allows the use of a single Z80 core, instead of multiple ones, a feature that the original project had.
+This modified version only allows the use of a single Z80 core, instead of multiple ones, a feature that the original project had:
+<ul>
+ <li>Windows (mingw32)</li>
+ <li>ESP32 (Arduino IDE)</li>
+ <li>ANDROID (c4droid)</li>
+</ul>
 
 <br><br>
 <h1>Original project</h1>
