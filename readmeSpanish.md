@@ -3,6 +3,11 @@ He realizado una conversión rápida del core del Z80 de José Luis Sánchez a C
 El proyecto original en C++ es de Jose Luis Sánchez. Yo tan sólo he realizado una conversión a C, para que
  sirva de plantilla en otras plataformas y compiladores de recursos más reducidos.<br>
 Esta versión modificada sólo permite usar un único core de Z80, en lugar de múltiples, característica que si tenía el proyecto original.
+<ul>
+ <li>Windows (mingw32)</li>
+ <li>ESP32 (Arduino IDE)</li>
+ <li>ANDROID (c4droid)</li>
+</ul>
 
 <br><br>
 <h1>Proyecto original</h1>
