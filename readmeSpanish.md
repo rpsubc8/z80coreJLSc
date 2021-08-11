@@ -197,3 +197,10 @@ Si activamos el pragma <b>cfg_use_test_fps_48k</b> en el <b>gbConfig.h</b> podre
 16:35:54.698 -> fps(135) - ms cur(8) min(8) max(8)
 16:35:55.713 -> fps(135) - ms cur(7) min(7) max(7)
 </pre>
+
+
+
+<br><br>
+<h1>ANDROID</h1>
+He realizado una conversión rápida en un sólo archivo compatible con <b>c4droid</b>, con salida simple a consola, de manera, que sólo tenemos que darle a compilar el archivo <b>main.c</b>.
+<center><img src='https://raw.githubusercontent.com/rpsubc8/z80coreJLSc/main/preview/previewAndroid.jpg'></center>
