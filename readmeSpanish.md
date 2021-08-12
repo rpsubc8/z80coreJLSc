@@ -6,7 +6,7 @@ Esta versión modificada sólo permite usar un único core de Z80, en lugar de m
 <ul>
  <li>Windows (mingw32)</li>
  <li>ESP32 (Arduino IDE)</li>
- <li>ANDROID (c4droid)</li>
+ <li>ANDROID (C4droid y CppDroid)</li>
 </ul>
 
 <br><br>
@@ -207,5 +207,5 @@ Si activamos el pragma <b>cfg_use_test_fps_48k</b> en el <b>gbConfig.h</b> podre
 
 <br><br>
 <h1>ANDROID</h1>
-He realizado una conversión rápida en un sólo archivo compatible con <b>c4droid</b>, con salida simple a consola, de manera, que sólo tenemos que darle a compilar el archivo <b>main.c</b>.
+He realizado una conversión rápida en un sólo archivo compatible con <b>C4droid</b> y <b>CppDroid</b>, con salida simple a consola, de manera, que sólo tenemos que darle a compilar el archivo <b>main.c</b>.
 <center><img src='https://raw.githubusercontent.com/rpsubc8/z80coreJLSc/main/preview/previewAndroid.jpg'></center>
