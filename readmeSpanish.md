@@ -7,6 +7,7 @@ Esta versión modificada sólo permite usar un único core de Z80, en lugar de m
  <li>Windows (mingw32)</li>
  <li>ESP32 (Arduino IDE)</li>
  <li>ANDROID (C4droid y CppDroid)</li>
+ <li>RP2040, W801, W806</li>
 </ul>
 
 <br><br>
@@ -203,6 +204,77 @@ Si activamos el pragma <b>cfg_use_test_fps_48k</b> en el <b>gbConfig.h</b> podre
 16:35:55.713 -> fps(135) - ms cur(7) min(7) max(7)
 </pre>
 
+<br><br>
+<h1>RP2040</h1>
+Se han realizado pruebas en la placa rp2040 adjunta:
+<center><img src='preview/rp2040mod.jpg'></center>
+Si activamos el pragma <b>cfg_use_test_fps_48k</b> en el <b>gbConfig.h</b> y desactivamos el <b>cfg_use_time_show</b>, en la placa RP2040, nos dará unos tiempos:
+
+<pre>
+fps(64) - ms cur(15) min(15) max(15)
+fps(64) - ms cur(15) min(15) max(15)
+fps(64) - ms cur(16) min(16) max(16)
+fps(64) - ms cur(16) min(16) max(16)
+fps(64) - ms cur(16) min(16) max(16)
+fps(64) - ms cur(16) min(16) max(16)
+fps(64) - ms cur(16) min(16) max(16)
+fps(64) - ms cur(16) min(16) max(16)
+fps(64) - ms cur(16) min(16) max(16)
+fps(64) - ms cur(16) min(16) max(16)
+fps(64) - ms cur(15) min(15) max(15)
+fps(64) - ms cur(15) min(15) max(15) 
+</pre>
+Dependiendo de la versión de framework, es posible que se tengan que sustituir los <b>printf</b> por <b>print</b>.
+
+
+<br><br>
+<h1>W806</h1>
+Se han realizado pruebas en la placa Winner Micro W806 adjunta:
+<center><img src='preview/w806mod.jpg'></center>
+Si activamos el pragma <b>cfg_use_test_fps_48k</b> en el <b>gbConfig.h</b> y desactivamos el <b>cfg_use_time_show</b>, nos dará unos tiempos:
+
+<pre>
+fps(62) - ms cur(16) min(16) max(16)
+fps(62) - ms cur(16) min(16) max(16)
+fps(62) - ms cur(16) min(16) max(16)
+fps(62) - ms cur(16) min(16) max(16)
+fps(62) - ms cur(17) min(17) max(17)
+fps(62) - ms cur(16) min(16) max(16)
+fps(62) - ms cur(16) min(16) max(16)
+fps(62) - ms cur(16) min(16) max(16)
+fps(62) - ms cur(16) min(16) max(16)
+fps(62) - ms cur(16) min(16) max(16)
+fps(62) - ms cur(17) min(17) max(17)
+fps(62) - ms cur(16) min(16) max(16)
+</pre>
+
+
+<br><br>
+<h1>W801</h1>
+Se han realizado pruebas en la placa Winner Micro W816 adjunta:
+<center><img src='preview/w801mod.jpg'></center>
+Si activamos el pragma <b>cfg_use_test_fps_48k</b> en el <b>gbConfig.h</b> y desactivamos el <b>cfg_use_time_show</b>, nos dará unos tiempos:
+
+<pre>
+fps(62) - ms cur(16) min(16) max(16)
+fps(62) - ms cur(16) min(16) max(16)
+fps(62) - ms cur(16) min(16) max(16)
+fps(62) - ms cur(17) min(17) max(17)
+fps(62) - ms cur(17) min(17) max(17)
+fps(62) - ms cur(16) min(16) max(16)
+fps(62) - ms cur(16) min(16) max(16)
+fps(62) - ms cur(16) min(16) max(16)
+fps(62) - ms cur(16) min(16) max(16)
+fps(62) - ms cur(16) min(16) max(16)
+fps(62) - ms cur(17) min(17) max(17)
+fps(62) - ms cur(16) min(16) max(16)
+fps(62) - ms cur(17) min(17) max(17)
+fps(62) - ms cur(16) min(16) max(16)
+fps(62) - ms cur(16) min(16) max(16)
+fps(62) - ms cur(16) min(16) max(16)
+fps(62) - ms cur(16) min(16) max(16)
+fps(62) - ms cur(17) min(17) max(17)
+</pre>
 
 
 <br><br>
