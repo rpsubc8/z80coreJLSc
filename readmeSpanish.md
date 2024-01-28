@@ -205,7 +205,7 @@ Si activamos el pragma <b>cfg_use_test_fps_48k</b> en el <b>gbConfig.h</b> podre
 </pre>
 
 <br><br>
-<h1>RP2040</h1>
+<h1>RP2040 fps</h1>
 Se han realizado pruebas en la placa rp2040 adjunta:
 <center><img src='preview/rp2040mod.jpg'></center>
 Si activamos el pragma <b>cfg_use_test_fps_48k</b> en el <b>gbConfig.h</b> y desactivamos el <b>cfg_use_time_show</b>, en la placa RP2040, nos dará unos tiempos:
@@ -228,7 +228,7 @@ Dependiendo de la versión de framework, es posible que se tengan que sustituir 
 
 
 <br><br>
-<h1>W806</h1>
+<h1>W806 fps</h1>
 Se han realizado pruebas en la placa Winner Micro W806 adjunta:
 <center><img src='preview/w806mod.jpg'></center>
 Si activamos el pragma <b>cfg_use_test_fps_48k</b> en el <b>gbConfig.h</b> y desactivamos el <b>cfg_use_time_show</b>, nos dará unos tiempos:
@@ -250,8 +250,8 @@ fps(62) - ms cur(16) min(16) max(16)
 
 
 <br><br>
-<h1>W801</h1>
-Se han realizado pruebas en la placa Winner Micro W816 adjunta:
+<h1>W801 fps</h1>
+Se han realizado pruebas en la placa Winner Micro W801 adjunta:
 <center><img src='preview/w801mod.jpg'></center>
 Si activamos el pragma <b>cfg_use_test_fps_48k</b> en el <b>gbConfig.h</b> y desactivamos el <b>cfg_use_time_show</b>, nos dará unos tiempos:
 
